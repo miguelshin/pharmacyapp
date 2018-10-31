@@ -1,17 +1,19 @@
 import { Injectable, OnInit } from "@angular/core";
 import { Pharmacy } from '../models/pharmacy.model';
+import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class PharmacyService {
-    constructor() {
+    BASE_API_URL:string = 'http://localhost:8080/';
 
+    constructor(private http: HttpClient) {
     }
-
+    
     ngOnInit(): void { 
-
     }
-
-    getPharmacies() : Pharmacy[] {
+    
+    getPharmacies(): Observable<Pharmacy[]> {
         var pharmacyList: Pharmacy[] = [];
         var pharmacy1 = {
             'code' : '1',
@@ -25,14 +27,28 @@ export class PharmacyService {
             'address' : 'c/pepe',
             'cif' : '323213'
         }
-  
-        pharmacyList.push(pharmacy1);
+        
+        let headers = new HttpHeaders({
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDA5Mjk5MjksImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQxNzkzOTI5fQ.sukTHwTGGEFkzefLqtcog8jDKBznGcgj8AaZT1lL3pnwjOugxbPHZG2AOjfPSUwvTSdDZ25BAHhDv3nC3RXl0Q'
+        });
+        
+        return this.http.get<Pharmacy[]>(this.BASE_API_URL + 'rest/pharmacy', { headers });
+        
+        /*pharmacyList.push(pharmacy1);
         pharmacyList.push(pharmacy2);
-        return pharmacyList;
+        return pharmacyList;*/
+    }
+
+    getPharmacy(pharmacyCode: string) {
+        let headers = new HttpHeaders({
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDA5Mjk5MjksImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQxNzkzOTI5fQ.sukTHwTGGEFkzefLqtcog8jDKBznGcgj8AaZT1lL3pnwjOugxbPHZG2AOjfPSUwvTSdDZ25BAHhDv3nC3RXl0Q'
+        });
+        
+        return this.http.get<Pharmacy[]>(this.BASE_API_URL + 'rest/pharmacy/' + pharmacyCode, { headers });
     }
 
     savePharmacy(pharmacy: Pharmacy) {
         console.log(pharmacy);
     }
-
+    
 }
