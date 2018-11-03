@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>Laboratorios </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <ion-list>
+      <button ion-item *ngFor="let laboratory of LaboratoryList" (click)="selectLaboratory(laboratory)">
+        {{ laboratory.name }}
+      </button>  
+    </ion-list>
+
+    <ion-fab right bottom>
+      <button (click)="goToAddLaboratory()" ion-fab mini><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+  </ion-content>
+  

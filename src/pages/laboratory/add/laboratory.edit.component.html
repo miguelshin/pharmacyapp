@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>Farmacias </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <form [formGroup]="pharmacyForm">
+        <ion-item>
+            <ion-label stacked>Nombre</ion-label>
+            <ion-input [(ngModel)]="pharmacy.name" formControlName="name" type="text"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!pharmacyForm.controls.name.value != null && !pharmacyForm.controls.name.valid">
+                <p style="color:red">Valor incorrecto: obligatorio y máx. 75 caracteres</p>        </ion-item>    
+        <ion-item>
+            <ion-label stacked>Dirección</ion-label>
+            <ion-input [(ngModel)]="pharmacy.address" formControlName="address" type="text"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!pharmacyForm.controls.address.value != null && !pharmacyForm.controls.address.valid">
+                <p style="color:red">Campo obligatorio</p>
+        </ion-item>    
+        <ion-item>
+            <ion-label stacked>CIF</ion-label>
+            <ion-input [(ngModel)]="pharmacy.cif" formControlName="cif" type="text"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!pharmacyForm.controls.cif.value != null && !pharmacyForm.controls.cif.valid">
+                <p style="color:red">Campo obligatorio</p>
+        </ion-item>    
+        
+        <button ion-button full (click)="savePharmacy(pharmacy)">Guardar farmacia</button>
+    </form>
+  </ion-content>
+  
