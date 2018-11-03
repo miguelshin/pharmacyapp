@@ -41,6 +41,17 @@ $colors: (
   dark:       #222
 );
 
+//$tabs-tab-color-active: color($colors, secondary);
+//$tabs-background: color($colors, primary);
+//$background-color: color($colors, dark);
+//$list-border-color: color($colors, light);
+//$text-input-md-show-focus-highlight: false;
+$text-input-md-highlight-color-invalid: #f53d3d;
+$text-input-md-highlight-color-valid: #95c928;
+$text-input-md-show-invalid-highlight: #f53d3d;
+$text-input-md-highlight-color: #95c928;
+$text-input-md-show-valid-highlight: #95c928;
+
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
