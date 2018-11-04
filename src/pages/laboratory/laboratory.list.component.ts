@@ -1,38 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { PharmacyService } from '../../services/pharmacy.service';
-import { Pharmacy } from '../../models/pharmacy.model';
+import { LaboratoryService } from '../../services/laboratory.service';
+import { Laboratory } from '../../models/laboratory.model';
 import { NavController } from 'ionic-angular';
-import { PharmacyEditPage } from './add/pharmacy.edit.component';
+    import { LaboratoryEditPage } from './add/laboratory.edit.component';
 
 @Component({
-    selector: 'page-pharmacy-list',
-    templateUrl: './pharmacy.list.component.html'
+    selector: 'page-Laboratory-list',
+    templateUrl: './laboratory.list.component.html'
 })
-export class PharmacyListPage implements OnInit {
-    pharmacyList: Pharmacy[];
+export class LaboratoryListPage implements OnInit {
+    laboratoryList: Laboratory[];
     
-    constructor(public pharmacyService: PharmacyService, private navCtrl: NavController) { }
+    constructor(public laboratoryService: LaboratoryService, private navCtrl: NavController) { }
     
     ngOnInit(): void { }
     
     ionViewWillEnter() {
-        this.pharmacyService.getPharmacies().subscribe(data => {
+        this.laboratoryService.getLaboratories().subscribe(data => {
             debugger;
-            this.pharmacyList = data;
-            //this.pharmacyList = 
+            this.laboratoryList = data;
+            //this.LaboratoryList = 
         });
     }
     
-    selectPharmacy(pharmacy: Pharmacy) {
-        var selectedPharmacy = this.pharmacyService
-        .getPharmacy(pharmacy.code)
-        .subscribe(selectedPharmacy => {
+    selectLaboratory(laboratory: Laboratory) {
+        var selectedLaboratory = this.laboratoryService
+        .getLaboratory(laboratory.code)
+        .subscribe(selectedLaboratory => {
             debugger;
-            this.navCtrl.push(PharmacyEditPage, { selectedPharmacy: selectedPharmacy });
+            this.navCtrl.push(LaboratoryEditPage, { selectedLaboratory: selectedLaboratory });
         });
     }
     
-    goToAddPharmacy() {
-        this.navCtrl.push(PharmacyEditPage);
+    goToAddLaboratory() {
+        this.navCtrl.push(LaboratoryEditPage);
     }
 }

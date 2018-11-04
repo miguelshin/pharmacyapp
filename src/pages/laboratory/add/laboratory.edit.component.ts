@@ -10,14 +10,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
         templateUrl: './laboratory.edit.component.html'
 })
 export class LaboratoryEditPage implements OnInit {
+    debugger;
     laboratory: Laboratory;
     laboratoryForm: FormGroup;
     constructor(public laboratoryService: LaboratoryService, private navCtrl: NavController, private navParams: NavParams, public toastCtrl: ToastController, public formBuilder: FormBuilder ) { 
         debugger;
         this.laboratoryForm = formBuilder.group({
             name: ['',  Validators.compose([Validators.maxLength(75), Validators.required])],
-            address: ['',  Validators.compose([Validators.maxLength(150), Validators.required])],
-            cif: ['',  Validators.compose([Validators.maxLength(9), Validators.required])]
+            address: ['',  Validators.compose([Validators.maxLength(150)])],
+            email: ['', Validators.compose([Validators.maxLength(200), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
+            phone: ['',  Validators.compose([Validators.maxLength(9)])]
         });
         this.laboratory = this.navParams.get('selectedLaboratory');
         if (!this.laboratory) {
@@ -36,14 +38,14 @@ export class LaboratoryEditPage implements OnInit {
                 .updateLaboratory(laboratoryToSave)
                 .subscribe(savedLaboratory => {
                     this.laboratory = savedLaboratory;
-                    this.presentSavedLaboratoryToast('La farmacia fue guardada con éxito');
+                    this.presentSavedLaboratoryToast('El laboratorio fue guardado con éxito');
                 });
             } else {
                 var selectedLaboratory = this.laboratoryService
                 .saveLaboratory(laboratoryToSave)
                 .subscribe(savedLaboratory => {
                     this.laboratory = savedLaboratory;
-                    this.presentSavedLaboratoryToast('La farmacia fue guardada con éxito');
+                    this.presentSavedLaboratoryToast('El laboratorio fue guardado con éxito');
                 });
             }
         }

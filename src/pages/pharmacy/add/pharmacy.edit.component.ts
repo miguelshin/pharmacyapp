@@ -16,8 +16,10 @@ export class PharmacyEditPage implements OnInit {
         debugger;
         this.pharmacyForm = formBuilder.group({
             name: ['',  Validators.compose([Validators.maxLength(75), Validators.required])],
-            address: ['',  Validators.compose([Validators.maxLength(150), Validators.required])],
-            cif: ['',  Validators.compose([Validators.maxLength(9), Validators.required])]
+            address: ['',  Validators.compose([Validators.maxLength(150)])],
+            cif: ['',  Validators.compose([Validators.maxLength(9)])],
+            email: ['', Validators.compose([Validators.maxLength(200), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
+            phone: ['',  Validators.compose([Validators.maxLength(9)])]
         });
         this.pharmacy = this.navParams.get('selectedPharmacy');
         if (!this.pharmacy) {

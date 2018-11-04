@@ -13,7 +13,7 @@ export class LaboratoryService {
     ngOnInit(): void { 
     }
     
-    getPharmacies(): Observable<Laboratory[]> {
+    getLaboratories(): Observable<Laboratory[]> {
         var laboratoryList: Laboratory[] = [];
         var laboratory1 = {
             'code' : '1',
