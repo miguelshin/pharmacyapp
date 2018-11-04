@@ -12,6 +12,32 @@ export class LaboratoryService {
     
     ngOnInit(): void { 
     }
+
+    searchLaboratories(searchText: string): Observable<Laboratory[]> {
+        var laboratoryList: Laboratory[] = [];
+        var laboratory1 = {
+            'code' : '1',
+            'name' : 'laboratory name',
+            'address' : 'c/pepe',
+            'cif' : '323213'
+        }
+        var laboratory2 = {
+            'code' : '1',
+            'name' : 'laboratory name',
+            'address' : 'c/pepe',
+            'cif' : '323213'
+        }
+        
+        let headers = new HttpHeaders({
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDA5Mjk5MjksImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQxNzkzOTI5fQ.sukTHwTGGEFkzefLqtcog8jDKBznGcgj8AaZT1lL3pnwjOugxbPHZG2AOjfPSUwvTSdDZ25BAHhDv3nC3RXl0Q'
+        });
+        
+        return this.http.get<Laboratory[]>(this.BASE_API_URL + 'rest/laboratory?textName=' + searchText, { headers });
+        
+        /*laboratoryList.push(laboratory1);
+        laboratoryList.push(laboratory2);
+        return laboratoryList;*/
+    }
     
     getLaboratories(): Observable<Laboratory[]> {
         var laboratoryList: Laboratory[] = [];

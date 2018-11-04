@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { LaboratoryService } from '../../services/laboratory.service';
 import { Laboratory } from '../../models/laboratory.model';
 import { NavController } from 'ionic-angular';
-    import { LaboratoryEditPage } from './add/laboratory.edit.component';
+    import { LaboratoryEditPage } from './edit/laboratory.edit.component';
 
 @Component({
-    selector: 'page-Laboratory-list',
+    selector: 'page-laboratory-list',
     templateUrl: './laboratory.list.component.html'
 })
 export class LaboratoryListPage implements OnInit {
@@ -24,7 +24,7 @@ export class LaboratoryListPage implements OnInit {
     }
     
     selectLaboratory(laboratory: Laboratory) {
-        var selectedLaboratory = this.laboratoryService
+        this.laboratoryService
         .getLaboratory(laboratory.code)
         .subscribe(selectedLaboratory => {
             debugger;

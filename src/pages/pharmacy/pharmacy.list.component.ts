@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PharmacyService } from '../../services/pharmacy.service';
 import { Pharmacy } from '../../models/pharmacy.model';
 import { NavController } from 'ionic-angular';
-import { PharmacyEditPage } from './add/pharmacy.edit.component';
+import { PharmacyEditPage } from './edit/pharmacy.edit.component';
 
 @Component({
     selector: 'page-pharmacy-list',
@@ -24,7 +24,7 @@ export class PharmacyListPage implements OnInit {
     }
     
     selectPharmacy(pharmacy: Pharmacy) {
-        var selectedPharmacy = this.pharmacyService
+        this.pharmacyService
         .getPharmacy(pharmacy.code)
         .subscribe(selectedPharmacy => {
             debugger;
