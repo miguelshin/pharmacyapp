@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Producto</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="productForm">
+        <ion-item>
+            <ion-label stacked>Nombre</ion-label>
+            <ion-input [(ngModel)]="product.name" formControlName="name" type="text"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!productForm.controls.name.value != null && !productForm.controls.name.valid">
+            <p style="color:red">Valor incorrecto: obligatorio y máx. 75 caracteres</p>        
+        </ion-item>    
+    </form>
+        <ion-item>
+            <ion-label stacked>Laboratorio</ion-label>
+            <ion-input (click)="goToLaboratorySelect()" [(ngModel)]="product.laboratory.name"></ion-input>
+        </ion-item>
+
+        <button ion-button full (click)="saveProduct(product)">Guardar producto</button>
+</ion-content>
