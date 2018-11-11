@@ -1,29 +1,30 @@
 import { Injectable, OnInit } from "@angular/core";
-import { Product } from '../models/product.model';
+import { Pharmacy } from '../models/pharmacy.model';
 import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
+import { CashOrder } from "../models/cashorder.model";
 
 @Injectable()
-export class ProductService {
+export class CashOrderService {
     BASE_API_URL:string = 'http://localhost:8080/';
-    
+
     constructor(private http: HttpClient) {
     }
     
     ngOnInit(): void { 
     }
     
-    getProducts(): Observable<Product[]> {
-        var productList: Product[] = [];
-        var product1 = {
+    getCashOrders(month, year): Observable<CashOrder[]> {
+        var pharmacyList: Pharmacy[] = [];
+        var pharmacy1 = {
             'code' : '1',
-            'name' : 'product name',
+            'name' : 'pharmacy name',
             'address' : 'c/pepe',
             'cif' : '323213'
         }
-        var product2 = {
+        var pharmacy2 = {
             'code' : '1',
-            'name' : 'product name',
+            'name' : 'pharmacy name',
             'address' : 'c/pepe',
             'cif' : '323213'
         }
@@ -32,40 +33,40 @@ export class ProductService {
             'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDE4MzcyMTcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQyNzAxMjE3fQ.vzjfStAnhJildQWBxXl9FDQrF3xsRZo5ITuRLNrfrH581DIMeXI9fCbONEn6FOeawd0wElHhSL3hy2iULeazGw'
         });
         
-        return this.http.get<Product[]>(this.BASE_API_URL + 'rest/product', { headers });
+        return this.http.get<CashOrder[]>(this.BASE_API_URL + 'rest/cashOrder/' + month + "/" + year, { headers });
         
-        /*productList.push(product1);
-        productList.push(product2);
-        return productList;*/
+        /*pharmacyList.push(pharmacy1);
+        pharmacyList.push(pharmacy2);
+        return pharmacyList;*/
     }
-    
-    getProduct(productCode: string) {
+
+    getPharmacy(pharmacyCode: string) {
         let headers = new HttpHeaders({
             'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDE4MzcyMTcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQyNzAxMjE3fQ.vzjfStAnhJildQWBxXl9FDQrF3xsRZo5ITuRLNrfrH581DIMeXI9fCbONEn6FOeawd0wElHhSL3hy2iULeazGw'
         });
         
-        return this.http.get<Product[]>(this.BASE_API_URL + 'rest/product/' + productCode, { headers });
+        return this.http.get<Pharmacy[]>(this.BASE_API_URL + 'rest/pharmacy/' + pharmacyCode, { headers });
     }
-    
-    saveProduct(product: Product) {
-        product.code = null;
-        let body = JSON.stringify(product);
-        let headers = new HttpHeaders({
-            'Content-Type':'application/json',
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDA5Mjk5MjksImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQxNzkzOTI5fQ.sukTHwTGGEFkzefLqtcog8jDKBznGcgj8AaZT1lL3pnwjOugxbPHZG2AOjfPSUwvTSdDZ25BAHhDv3nC3RXl0Q'
-        });
-        
-        return this.http.post<Product>(this.BASE_API_URL + 'rest/product/', body, { headers });
-    }
-    
-    updateProduct(product: Product) {
-        let body = JSON.stringify(product);
+
+    savePharmacy(pharmacy: Pharmacy) {
+        pharmacy.code = null;
+        let body = JSON.stringify(pharmacy);
         let headers = new HttpHeaders({
             'Content-Type':'application/json',
             'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDE4MzcyMTcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQyNzAxMjE3fQ.vzjfStAnhJildQWBxXl9FDQrF3xsRZo5ITuRLNrfrH581DIMeXI9fCbONEn6FOeawd0wElHhSL3hy2iULeazGw'
         });
         
-        return this.http.put<Product>(this.BASE_API_URL + 'rest/product/', body, { headers });
+        return this.http.post<Pharmacy>(this.BASE_API_URL + 'rest/pharmacy/', body, { headers });
     }
-    
+
+    updatePharmacy(pharmacy: Pharmacy) {
+        let body = JSON.stringify(pharmacy);
+        let headers = new HttpHeaders({
+            'Content-Type':'application/json',
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDE4MzcyMTcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQyNzAxMjE3fQ.vzjfStAnhJildQWBxXl9FDQrF3xsRZo5ITuRLNrfrH581DIMeXI9fCbONEn6FOeawd0wElHhSL3hy2iULeazGw'
+        });
+        
+        return this.http.put<Pharmacy>(this.BASE_API_URL + 'rest/pharmacy/', body, { headers });
+    }
+
 }

@@ -1,6 +1,7 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, LOCALE_ID, ErrorHandler } from '@angular/core';
+import localeES from '@angular/common/locales/es';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, IonicPageModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { PharmacyListPage } from '../pages/pharmacy/pharmacy.list.component';
@@ -13,6 +14,9 @@ import { LaboratorySelectPage } from '../pages/laboratory/select/laboratory.sele
 import { ProductListPage } from '../pages/product/product.list.component';
 import { ProductEditPage } from '../pages/product/edit/product.edit.component';
 
+import { CashOrderListPage } from '../pages/cashorder/cashorder.list.component';
+import { CashOrderEditModalPage } from '../pages/cashorder/edit/cashorder.edit.modal.component';
+
 import { AboutPage } from '../pages/about/about';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -24,6 +28,10 @@ import { LaboratoryService } from '../services/laboratory.service';
 import { HttpClientModule } from '@angular/common/http'; 
 import { ProductService } from '../services/product.service';
 
+import { NgCalendarModule  } from 'ionic2-calendar';
+import { registerLocaleData } from '@angular/common';
+import { CashOrderService } from '../services/cashorder.service';
+
 @NgModule({
   declarations: [
     PharmacyListPage,
@@ -33,6 +41,8 @@ import { ProductService } from '../services/product.service';
     LaboratorySelectPage,
     ProductListPage,
     ProductEditPage,
+    CashOrderListPage,
+    CashOrderEditModalPage,
     MyApp,
     AboutPage,
     TabsPage
@@ -40,7 +50,8 @@ import { ProductService } from '../services/product.service';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    NgCalendarModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -51,6 +62,8 @@ import { ProductService } from '../services/product.service';
     LaboratorySelectPage,
     ProductListPage,
     ProductEditPage,
+    CashOrderListPage,
+    CashOrderEditModalPage,
     MyApp,
     AboutPage,
     TabsPage,
@@ -59,9 +72,12 @@ import { ProductService } from '../services/product.service';
     PharmacyService,
     LaboratoryService,
     ProductService,
+    CashOrderService,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: LOCALE_ID, useValue: 'es-ES' },
+    { provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}
+registerLocaleData(localeES);
