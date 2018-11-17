@@ -3,7 +3,7 @@ import { NavController, ModalController, AlertController } from 'ionic-angular';
 import * as moment from 'moment';
 import { CashOrderEditModalPage } from './edit/cashorder.edit.modal.component';
 import { CashOrderService } from '../../services/cashorder.service';
- 
+
 @Component({
   selector: 'page-cashorder-list',
   templateUrl: 'cashorder.list.component.html'
@@ -12,14 +12,37 @@ export class CashOrderListPage {
   eventSource = [];
   viewTitle: string;
   selectedDay = new Date();
- 
+  
   calendar = {
     mode: 'month',
     currentDate: new Date()
   };
   
   constructor(public cashOrderService: CashOrderService, public navCtrl: NavController, private modalCtrl: ModalController, private alertCtrl: AlertController) { }
- 
+  
+  ionViewWillEnter() {
+    this.eventSource = [];
+    this.cashOrderService.getCashOrders(10, 2018).subscribe(cashOrders => {
+      debugger;
+      let events = this.eventSource;
+      cashOrders.forEach(cashOrder => {
+        let date = new Date(cashOrder.date);
+        date.setHours(15);
+        let eventData = {
+          startTime: date,
+          endTime: date,
+          allDay: false
+        };
+        events.push(eventData);
+        this.eventSource = [];
+        
+        setTimeout(() => {
+          this.eventSource = events;
+        });
+      });
+    });
+  }
+  
   addEvent() {
     let modal = this.modalCtrl.create(CashOrderEditModalPage, {selectedDay: this.selectedDay});
     // 
@@ -29,10 +52,10 @@ export class CashOrderListPage {
     modal.onDidDismiss(data => {
       if (data) {
         let eventData = data;
- 
+        
         eventData.startTime = new Date(data.startTime);
         eventData.endTime = new Date(data.endTime);
- 
+        
         let events = this.eventSource;
         events.push(eventData);
         this.eventSource = [];
@@ -42,14 +65,18 @@ export class CashOrderListPage {
       }
     });
   }
- 
+  
   onViewTitleChanged(title) {
     this.viewTitle = title;
   }
- 
+  
   onEventSelected(event) {
-    let start = moment(event.startTime).format('LLLL');
-    let end = moment(event.endTime).format('LLLL');
+    let date = new Date(event.startTime);
+    let hoursOffset = (new Date(event.startTime)).getTimezoneOffset() / 60;
+    date.setHours(event.startTime.getHours() + hoursOffset);
+
+    let start = moment(date).format('LLLL');
+    let end = moment(date).format('LLLL');
     
     let alert = this.alertCtrl.create({
       title: '' + event.title,
@@ -58,7 +85,7 @@ export class CashOrderListPage {
     })
     alert.present();
   }
- 
+  
   onTimeSelected(ev) {
     this.selectedDay = ev.selectedTime;
   }
