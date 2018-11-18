@@ -12,6 +12,20 @@ export class PharmacyService {
     
     ngOnInit(): void { 
     }
+
+    searchPharmacies(searchText: string): Observable<Pharmacy[]> {
+        var pharmacyList: Pharmacy[] = [];
+
+        let headers = new HttpHeaders({
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDE4MzcyMTcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQyNzAxMjE3fQ.vzjfStAnhJildQWBxXl9FDQrF3xsRZo5ITuRLNrfrH581DIMeXI9fCbONEn6FOeawd0wElHhSL3hy2iULeazGw'
+        });
+        
+        return this.http.get<Pharmacy[]>(this.BASE_API_URL + 'rest/pharmacy?textName=' + searchText, { headers });
+        
+        /*laboratoryList.push(laboratory1);
+        laboratoryList.push(laboratory2);
+        return laboratoryList;*/
+    }
     
     getPharmacies(): Observable<Pharmacy[]> {
         var pharmacyList: Pharmacy[] = [];

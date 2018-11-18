@@ -27,8 +27,9 @@ export class CashOrderListPage {
       let events = this.eventSource;
       cashOrders.forEach(cashOrder => {
         let date = new Date(cashOrder.date);
-        date.setHours(15);
         let eventData = {
+          code: cashOrder.code,
+          title: cashOrder.pharmacy.name,
           startTime: date,
           endTime: date,
           allDay: false
@@ -43,26 +44,14 @@ export class CashOrderListPage {
     });
   }
   
-  addEvent() {
+  goToAddCashOrder() {
     let modal = this.modalCtrl.create(CashOrderEditModalPage, {selectedDay: this.selectedDay});
     // 
     //this.cashOrderService.getCashOrders // TODO: par cada fecha, poner un event en eventsource con el formato:
     //  event = { startTime: new Date().toISOString(), endTime: new Date().toISOString(), allDay: false };
     modal.present();
-    modal.onDidDismiss(data => {
-      if (data) {
-        let eventData = data;
-        
-        eventData.startTime = new Date(data.startTime);
-        eventData.endTime = new Date(data.endTime);
-        
-        let events = this.eventSource;
-        events.push(eventData);
-        this.eventSource = [];
-        setTimeout(() => {
-          this.eventSource = events;
-        });
-      }
+    modal.onDidDismiss(cashOrder => {
+      this.ionViewWillEnter();
     });
   }
   

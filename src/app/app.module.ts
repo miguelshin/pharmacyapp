@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 
 import { PharmacyListPage } from '../pages/pharmacy/pharmacy.list.component';
 import { PharmacyEditPage } from '../pages/pharmacy/edit/pharmacy.edit.component';
+import { PharmacySelectPage } from '../pages/pharmacy/select/pharmacy.select.page';
 
 import { LaboratoryListPage } from '../pages/laboratory/laboratory.list.component';
 import { LaboratoryEditPage } from '../pages/laboratory/edit/laboratory.edit.component';
@@ -36,6 +37,7 @@ import { CashOrderService } from '../services/cashorder.service';
   declarations: [
     PharmacyListPage,
     PharmacyEditPage,
+    PharmacySelectPage,
     LaboratoryListPage,
     LaboratoryEditPage,
     LaboratorySelectPage,
@@ -57,6 +59,7 @@ import { CashOrderService } from '../services/cashorder.service';
   entryComponents: [
     PharmacyListPage,
     PharmacyEditPage,
+    PharmacySelectPage,
     LaboratoryListPage,
     LaboratoryEditPage,
     LaboratorySelectPage,
