@@ -1,0 +1,25 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<ion-buttons start>
+			<button ion-button icon-only (click)="cancel()">
+				<ion-icon name="close"></ion-icon>
+			</button>
+		</ion-buttons>
+	
+		<ion-title>Seleccionar producto</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-searchbar
+	[(ngModel)]="searchText"
+	(ionInput)="searchProducts()"
+	(ionFocus)="searchProducts()"
+	debounce=500>
+</ion-searchbar>
+<ion-list>
+	<ion-item *ngFor="let product of productList" (click)="selectProduct(product)">
+		{{ product.name }}
+	</ion-item>
+</ion-list>
+</ion-content>

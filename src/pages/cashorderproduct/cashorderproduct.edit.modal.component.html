@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="cancel()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Pedido</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+      <ion-label stacked>Producto</ion-label>
+      <ion-input type="text" [(ngModel)]="cashOrderProduct.product.name" (click)="openProductModal()"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Cantidad</ion-label>
+      <ion-input type="text" [(ngModel)]="cashOrderProduct.quantity"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label stacked>Importe</ion-label>
+      <ion-input type="text" [(ngModel)]="cashOrderProduct.amount"></ion-input>
+    </ion-item>
+    
+    <button ion-button full icon-left (click)="add()">
+      <ion-icon name="checkmark"></ion-icon>Añadir pedidoo
+    </button>
+</ion-content>
