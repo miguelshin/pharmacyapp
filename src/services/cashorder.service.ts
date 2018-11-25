@@ -1,5 +1,4 @@
 import { Injectable, OnInit } from "@angular/core";
-import { CashOrder } from '../models/cashOrder.model';
 import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import { CashOrder } from "../models/cashorder.model";
@@ -16,7 +15,7 @@ export class CashOrderService {
     
     getCashOrders(month, year): Observable<CashOrder[]> {
         let headers = new HttpHeaders({
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDE4MzcyMTcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQyNzAxMjE3fQ.vzjfStAnhJildQWBxXl9FDQrF3xsRZo5ITuRLNrfrH581DIMeXI9fCbONEn6FOeawd0wElHhSL3hy2iULeazGw'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDMwNTExMzgsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQzOTE1MTM4fQ.Z6F8aXk6dcqlixa2UJ7qEtoXDMVyctCd4oZNKbNI-9QaTVWhavpgxhBm3DrCUbdqMI00_Sy8ZURt5wZ6zeuCGA'
         });
         
         return this.http.get<CashOrder[]>(this.BASE_API_URL + 'rest/cashOrder/' + month + "/" + year, { headers });
@@ -24,7 +23,7 @@ export class CashOrderService {
     
     getCashOrder(cashOrderCode: string) {
         let headers = new HttpHeaders({
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDE4MzcyMTcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQyNzAxMjE3fQ.vzjfStAnhJildQWBxXl9FDQrF3xsRZo5ITuRLNrfrH581DIMeXI9fCbONEn6FOeawd0wElHhSL3hy2iULeazGw'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDMwNTExMzgsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQzOTE1MTM4fQ.Z6F8aXk6dcqlixa2UJ7qEtoXDMVyctCd4oZNKbNI-9QaTVWhavpgxhBm3DrCUbdqMI00_Sy8ZURt5wZ6zeuCGA'
         });
         
         return this.http.get<CashOrder[]>(this.BASE_API_URL + 'rest/cashOrder/' + cashOrderCode, { headers });
@@ -35,7 +34,7 @@ export class CashOrderService {
         let body = JSON.stringify(cashOrder);
         let headers = new HttpHeaders({
             'Content-Type':'application/json',
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDE4MzcyMTcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQyNzAxMjE3fQ.vzjfStAnhJildQWBxXl9FDQrF3xsRZo5ITuRLNrfrH581DIMeXI9fCbONEn6FOeawd0wElHhSL3hy2iULeazGw'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDMwNTExMzgsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQzOTE1MTM4fQ.Z6F8aXk6dcqlixa2UJ7qEtoXDMVyctCd4oZNKbNI-9QaTVWhavpgxhBm3DrCUbdqMI00_Sy8ZURt5wZ6zeuCGA'
         });
         
         return this.http.post<CashOrder>(this.BASE_API_URL + 'rest/cashOrder/', body, { headers });
@@ -45,7 +44,7 @@ export class CashOrderService {
         let body = JSON.stringify(cashOrder);
         let headers = new HttpHeaders({
             'Content-Type':'application/json',
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDE4MzcyMTcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQyNzAxMjE3fQ.vzjfStAnhJildQWBxXl9FDQrF3xsRZo5ITuRLNrfrH581DIMeXI9fCbONEn6FOeawd0wElHhSL3hy2iULeazGw'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDMwNTExMzgsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQzOTE1MTM4fQ.Z6F8aXk6dcqlixa2UJ7qEtoXDMVyctCd4oZNKbNI-9QaTVWhavpgxhBm3DrCUbdqMI00_Sy8ZURt5wZ6zeuCGA'
         });
         
         return this.http.put<CashOrder>(this.BASE_API_URL + 'rest/cashOrder/', body, { headers });

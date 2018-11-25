@@ -4,6 +4,8 @@ import * as moment from 'moment';
 import { PharmacySelectPage } from '../../pharmacy/select/pharmacy.select.page';
 import { CashOrderService } from '../../../services/cashorder.service';
 import { Pharmacy } from '../../../models';
+import { CashOrder } from '../../../models/cashorder.model';
+import { CashOrderProductEditModalPage } from '../../cashorderproduct/cashorderproduct.edit.modal.component';
 
 @Component({
   selector: 'cashorder-edit-page-modal',
@@ -11,17 +13,16 @@ import { Pharmacy } from '../../../models';
 })
 export class CashOrderEditModalPage {
   
-  cashOrder = { 
-    code: null,
-    date: new Date().toISOString(), 
-    pharmacy: new Pharmacy(), 
-    observations: null 
-  };
+  cashOrder: CashOrder = new CashOrder();
+
   minDate = new Date().toISOString();
   
   constructor(public cashOrderService: CashOrderService, public navCtrl: NavController, private navParams: NavParams, public viewCtrl: ViewController, private modalCtrl: ModalController, public toastCtrl: ToastController) {
     let preselectedDate = moment(this.navParams.get('selectedDay')).format();
-    this.cashOrder.date = preselectedDate;
+    debugger;
+    this.cashOrder.pharmacy = new Pharmacy();
+    this.cashOrder.date = new Date();
+    this.cashOrder.cashOrderProducts = [];
   }
   
   cancel() {
@@ -54,4 +55,17 @@ export class CashOrderEditModalPage {
       }
     });
   }
+
+  openCashOrderProductModal() {
+    debugger;
+    let modal = this.modalCtrl.create(CashOrderProductEditModalPage);
+    modal.present();
+    modal.onDidDismiss(cashOrderProduct => {
+      debugger;
+      if (cashOrderProduct) {
+        this.cashOrder.cashOrderProducts.push(cashOrderProduct);
+      }
+    });
+  }
+
 }

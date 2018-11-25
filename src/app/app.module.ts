@@ -14,10 +14,11 @@ import { LaboratorySelectPage } from '../pages/laboratory/select/laboratory.sele
 
 import { ProductListPage } from '../pages/product/product.list.component';
 import { ProductEditPage } from '../pages/product/edit/product.edit.component';
+import { ProductSelectPage } from '../pages/product/select/product.select.page';
 
 import { CashOrderListPage } from '../pages/cashorder/cashorder.list.component';
 import { CashOrderEditModalPage } from '../pages/cashorder/edit/cashorder.edit.modal.component';
-
+import { CashOrderProductEditModalPage } from '../pages/cashorderproduct/cashorderproduct.edit.modal.component';
 import { AboutPage } from '../pages/about/about';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -43,8 +44,10 @@ import { CashOrderService } from '../services/cashorder.service';
     LaboratorySelectPage,
     ProductListPage,
     ProductEditPage,
+    ProductSelectPage,
     CashOrderListPage,
     CashOrderEditModalPage,
+    CashOrderProductEditModalPage,
     MyApp,
     AboutPage,
     TabsPage
@@ -65,8 +68,10 @@ import { CashOrderService } from '../services/cashorder.service';
     LaboratorySelectPage,
     ProductListPage,
     ProductEditPage,
+    ProductSelectPage,
     CashOrderListPage,
     CashOrderEditModalPage,
+    CashOrderProductEditModalPage,
     MyApp,
     AboutPage,
     TabsPage,
