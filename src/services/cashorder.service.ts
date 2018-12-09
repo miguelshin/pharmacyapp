@@ -15,18 +15,18 @@ export class CashOrderService {
     
     getCashOrders(month, year): Observable<CashOrder[]> {
         let headers = new HttpHeaders({
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDMwNTExMzgsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQzOTE1MTM4fQ.Z6F8aXk6dcqlixa2UJ7qEtoXDMVyctCd4oZNKbNI-9QaTVWhavpgxhBm3DrCUbdqMI00_Sy8ZURt5wZ6zeuCGA'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDQyNjU2MzcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ1MTI5NjM3fQ.axGamv_UTxKHFgjQhtkioOwv0ZtlUNNhqD42oeu9Gf4-clViFkmdJpMd5T-RnmEoZD-YV_fF11t0ShICa_8egA'
         });
         
         return this.http.get<CashOrder[]>(this.BASE_API_URL + 'rest/cashOrder/' + month + "/" + year, { headers });
     }
     
-    getCashOrder(cashOrderCode: string) {
+    getCashOrder(cashOrderCode: string): Observable<CashOrder> {
         let headers = new HttpHeaders({
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDMwNTExMzgsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQzOTE1MTM4fQ.Z6F8aXk6dcqlixa2UJ7qEtoXDMVyctCd4oZNKbNI-9QaTVWhavpgxhBm3DrCUbdqMI00_Sy8ZURt5wZ6zeuCGA'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDQyNjU2MzcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ1MTI5NjM3fQ.axGamv_UTxKHFgjQhtkioOwv0ZtlUNNhqD42oeu9Gf4-clViFkmdJpMd5T-RnmEoZD-YV_fF11t0ShICa_8egA'
         });
         
-        return this.http.get<CashOrder[]>(this.BASE_API_URL + 'rest/cashOrder/' + cashOrderCode, { headers });
+        return this.http.get<CashOrder>(this.BASE_API_URL + 'rest/cashOrder/' + cashOrderCode, { headers });
     }
     
     saveCashOrder(cashOrder: CashOrder) {
@@ -34,7 +34,7 @@ export class CashOrderService {
         let body = JSON.stringify(cashOrder);
         let headers = new HttpHeaders({
             'Content-Type':'application/json',
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDMwNTExMzgsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQzOTE1MTM4fQ.Z6F8aXk6dcqlixa2UJ7qEtoXDMVyctCd4oZNKbNI-9QaTVWhavpgxhBm3DrCUbdqMI00_Sy8ZURt5wZ6zeuCGA'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDQyNjU2MzcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ1MTI5NjM3fQ.axGamv_UTxKHFgjQhtkioOwv0ZtlUNNhqD42oeu9Gf4-clViFkmdJpMd5T-RnmEoZD-YV_fF11t0ShICa_8egA'
         });
         
         return this.http.post<CashOrder>(this.BASE_API_URL + 'rest/cashOrder/', body, { headers });
@@ -44,7 +44,7 @@ export class CashOrderService {
         let body = JSON.stringify(cashOrder);
         let headers = new HttpHeaders({
             'Content-Type':'application/json',
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDMwNTExMzgsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQzOTE1MTM4fQ.Z6F8aXk6dcqlixa2UJ7qEtoXDMVyctCd4oZNKbNI-9QaTVWhavpgxhBm3DrCUbdqMI00_Sy8ZURt5wZ6zeuCGA'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDQyNjU2MzcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ1MTI5NjM3fQ.axGamv_UTxKHFgjQhtkioOwv0ZtlUNNhqD42oeu9Gf4-clViFkmdJpMd5T-RnmEoZD-YV_fF11t0ShICa_8egA'
         });
         
         return this.http.put<CashOrder>(this.BASE_API_URL + 'rest/cashOrder/', body, { headers });

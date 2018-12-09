@@ -14,22 +14,38 @@ import { CashOrderProductEditModalPage } from '../../cashorderproduct/cashorderp
 export class CashOrderEditModalPage {
   
   cashOrder: CashOrder = new CashOrder();
+  userTimezoneOffset = (new Date()).getTimezoneOffset() * 60000;
 
-  minDate = new Date().toISOString();
-  
   constructor(public cashOrderService: CashOrderService, public navCtrl: NavController, private navParams: NavParams, public viewCtrl: ViewController, private modalCtrl: ModalController, public toastCtrl: ToastController) {
     let preselectedDate = moment(this.navParams.get('selectedDay')).format();
+    let code = this.navParams.get('code');
     debugger;
-    this.cashOrder.pharmacy = new Pharmacy();
-    this.cashOrder.date = new Date();
-    this.cashOrder.cashOrderProducts = [];
+    if (code) {
+      this.getCashOrder(code);
+    }
+    if (preselectedDate) {
+      this.cashOrder.pharmacy = new Pharmacy();
+      this.cashOrder.date = new Date((new Date()).getTime() - this.userTimezoneOffset).toISOString();
+      this.cashOrder.cashOrderProducts = [];
+    }
   }
   
   cancel() {
     this.viewCtrl.dismiss();
   }
-  
+
+  getCashOrder(code: string) {
+    this.cashOrderService.getCashOrder(code)
+      .subscribe(cashOrder => {
+        debugger;
+        this.cashOrder = cashOrder;
+        this.cashOrder.date = new Date((new Date(this.cashOrder.date)).getTime() - this.userTimezoneOffset).toISOString();
+        this.presentSavedCashOrderToast('La cita y pedidos fueron guardados con éxito');
+      });
+  }
+
   save() {
+    this.cashOrder.date = new Date((new Date(this.cashOrder.date)).getTime() + this.userTimezoneOffset).toISOString();
     this.cashOrderService.saveCashOrder(this.cashOrder)
       .subscribe(savedCashOrder => {
         this.cashOrder = savedCashOrder;

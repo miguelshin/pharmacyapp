@@ -17,7 +17,7 @@ export class PharmacyService {
         var pharmacyList: Pharmacy[] = [];
 
         let headers = new HttpHeaders({
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDMwNTExMzgsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQzOTE1MTM4fQ.Z6F8aXk6dcqlixa2UJ7qEtoXDMVyctCd4oZNKbNI-9QaTVWhavpgxhBm3DrCUbdqMI00_Sy8ZURt5wZ6zeuCGA'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDQyNjU2MzcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ1MTI5NjM3fQ.axGamv_UTxKHFgjQhtkioOwv0ZtlUNNhqD42oeu9Gf4-clViFkmdJpMd5T-RnmEoZD-YV_fF11t0ShICa_8egA'
         });
         
         return this.http.get<Pharmacy[]>(this.BASE_API_URL + 'rest/pharmacy?textName=' + searchText, { headers });
@@ -43,7 +43,7 @@ export class PharmacyService {
         }
         
         let headers = new HttpHeaders({
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDMwNTExMzgsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQzOTE1MTM4fQ.Z6F8aXk6dcqlixa2UJ7qEtoXDMVyctCd4oZNKbNI-9QaTVWhavpgxhBm3DrCUbdqMI00_Sy8ZURt5wZ6zeuCGA'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDQyNjU2MzcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ1MTI5NjM3fQ.axGamv_UTxKHFgjQhtkioOwv0ZtlUNNhqD42oeu9Gf4-clViFkmdJpMd5T-RnmEoZD-YV_fF11t0ShICa_8egA'
         });
         
         return this.http.get<Pharmacy[]>(this.BASE_API_URL + 'rest/pharmacy', { headers });
@@ -55,10 +55,10 @@ export class PharmacyService {
 
     getPharmacy(pharmacyCode: string) {
         let headers = new HttpHeaders({
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDMwNTExMzgsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQzOTE1MTM4fQ.Z6F8aXk6dcqlixa2UJ7qEtoXDMVyctCd4oZNKbNI-9QaTVWhavpgxhBm3DrCUbdqMI00_Sy8ZURt5wZ6zeuCGA'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDQyNjU2MzcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ1MTI5NjM3fQ.axGamv_UTxKHFgjQhtkioOwv0ZtlUNNhqD42oeu9Gf4-clViFkmdJpMd5T-RnmEoZD-YV_fF11t0ShICa_8egA'
         });
         
-        return this.http.get<Pharmacy[]>(this.BASE_API_URL + 'rest/pharmacy/' + pharmacyCode, { headers });
+        return this.http.get<Pharmacy>(this.BASE_API_URL + 'rest/pharmacy/' + pharmacyCode, { headers });
     }
 
     savePharmacy(pharmacy: Pharmacy) {
@@ -66,7 +66,7 @@ export class PharmacyService {
         let body = JSON.stringify(pharmacy);
         let headers = new HttpHeaders({
             'Content-Type':'application/json',
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDMwNTExMzgsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQzOTE1MTM4fQ.Z6F8aXk6dcqlixa2UJ7qEtoXDMVyctCd4oZNKbNI-9QaTVWhavpgxhBm3DrCUbdqMI00_Sy8ZURt5wZ6zeuCGA'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDQyNjU2MzcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ1MTI5NjM3fQ.axGamv_UTxKHFgjQhtkioOwv0ZtlUNNhqD42oeu9Gf4-clViFkmdJpMd5T-RnmEoZD-YV_fF11t0ShICa_8egA'
         });
         
         return this.http.post<Pharmacy>(this.BASE_API_URL + 'rest/pharmacy/', body, { headers });
@@ -76,7 +76,7 @@ export class PharmacyService {
         let body = JSON.stringify(pharmacy);
         let headers = new HttpHeaders({
             'Content-Type':'application/json',
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDMwNTExMzgsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQzOTE1MTM4fQ.Z6F8aXk6dcqlixa2UJ7qEtoXDMVyctCd4oZNKbNI-9QaTVWhavpgxhBm3DrCUbdqMI00_Sy8ZURt5wZ6zeuCGA'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDQyNjU2MzcsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ1MTI5NjM3fQ.axGamv_UTxKHFgjQhtkioOwv0ZtlUNNhqD42oeu9Gf4-clViFkmdJpMd5T-RnmEoZD-YV_fF11t0ShICa_8egA'
         });
         
         return this.http.put<Pharmacy>(this.BASE_API_URL + 'rest/pharmacy/', body, { headers });

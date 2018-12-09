@@ -12,8 +12,8 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-label stacked>Fecha</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="cashOrder.date" [min]="minDate"></ion-datetime>
+      <ion-label stacked>Fecha{{ cashOrder.date | date }}</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY HH:mm" pickerFormat="DD/MM/YYYY HH:mm" [(ngModel)]="cashOrder.date" [min]="minDate" max="2050"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label stacked>Farmacia</ion-label>
