@@ -34,6 +34,15 @@ import { NgCalendarModule  } from 'ionic2-calendar';
 import { registerLocaleData } from '@angular/common';
 import { CashOrderService } from '../services/cashorder.service';
 
+import { AngularFireModule } from 'angularfire2';
+
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+import { environment } from "../environment/environment";
+
+import { ImagePicker } from '@ionic-native/image-picker';
+import firebase from 'firebase';
+
 @NgModule({
   declarations: [
     PharmacyListPage,
@@ -56,7 +65,9 @@ import { CashOrderService } from '../services/cashorder.service';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    NgCalendarModule
+    NgCalendarModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -84,8 +95,9 @@ import { CashOrderService } from '../services/cashorder.service';
     StatusBar,
     SplashScreen,
     { provide: LOCALE_ID, useValue: 'es-ES' },
-    { provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+    { provide: ErrorHandler, useClass: IonicErrorHandler},
+    ImagePicker
+  ],
 })
 export class AppModule {}
 registerLocaleData(localeES);

@@ -1,6 +1,9 @@
 {
   "name": "pharmacyApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular",
-  "pro_id": "37e184df"
+  "pro_id": "37e184df",
+  "id": "37e184df"
 }
