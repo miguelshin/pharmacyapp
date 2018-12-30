@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class PharmacyService {
-    BASE_API_URL:string = 'http://localhost:8080/';
+    BASE_API_URL:string = 'https://pharmacy-app-rest.herokuapp.com/';
 
     constructor(private http: HttpClient) {
     }
