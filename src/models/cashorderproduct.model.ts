@@ -1,4 +1,3 @@
-import { Pharmacy } from "./pharmacy.model";
 import { Product } from "./product.model";
 
 export class CashOrderProduct {

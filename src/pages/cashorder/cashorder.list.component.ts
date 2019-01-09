@@ -22,8 +22,10 @@ export class CashOrderListPage {
   
   ionViewWillEnter() {
     this.eventSource = [];
-    let month = (new Date()).getMonth();
-    this.cashOrderService.getCashOrders(month, 2018).subscribe(cashOrders => {
+    let today = (new Date());
+    let month = today.getMonth();
+    let year = today.getFullYear();
+    this.cashOrderService.getCashOrders(month, year).subscribe(cashOrders => {
       debugger;
       let events = this.eventSource;
       cashOrders.forEach(cashOrder => {

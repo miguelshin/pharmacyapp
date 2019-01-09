@@ -5,7 +5,7 @@ export const environment = {
         authDomain: "pharmacyapp-b56e1.firebaseapp.com",
         databaseURL: "https://pharmacyapp-b56e1.firebaseio.com",
         projectId: "pharmacyapp-b56e1",
-        storageBucket: "",
+        storageBucket: "pharmacyapp-b56e1.appspot.com",
         messagingSenderId: "86029123794"
     }
 };

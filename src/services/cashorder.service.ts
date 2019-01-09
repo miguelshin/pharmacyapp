@@ -1,18 +1,27 @@
 import { Injectable, OnInit } from "@angular/core";
+import { Platform } from 'ionic-angular';
 import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import { CashOrder } from "../models/cashorder.model";
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import  firebase from 'firebase';
 import { AngularFireModule } from "angularfire2";
 import { environment } from "../environment/environment";
-AngularFireModule
+import { File } from '@ionic-native/file';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Transfer, TransferObject} from '@ionic-native/transfer';
+
 @Injectable()
 export class CashOrderService {
     BASE_API_URL:string = 'https://pharmacy-app-rest.herokuapp.com/';
-    
+    public cameraImage: String;
+    storageDirectory: string = '';
+    private fileTransfer: TransferObject; 
     constructor(private http: HttpClient, 
-        private angularFireModule: AngularFireModule    ) {
+        private angularFireModule: AngularFireModule,
+        private file: File,
+        private camera: Camera,
+        private transfer: Transfer,
+        public platform: Platform) {
             firebase.initializeApp(environment.firebase)
     }
     
@@ -21,7 +30,7 @@ export class CashOrderService {
     
     getCashOrders(month, year): Observable<CashOrder[]> {
         let headers = new HttpHeaders({
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDU4NDIwMjIsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ2NzA2MDIyfQ.bQYnf82vTANJBgWFsfRnH2yJ2IgrTS6g4Fq3LUhIasgTVcaE5eezy4Fgji0W8BrgEbWflXIMjAyz7WQzBp4Ppw'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDcwMjYyNDEsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ3ODkwMjQxfQ.BXGERbj9YBpg2n7CQBwnZ0tlFamoTuPGCfZxTx4afqFVx2d7_gNmphMYQMdm5CL384CZwpCuoCsp5xpd4BGkog'
         });
         
         return this.http.get<CashOrder[]>(this.BASE_API_URL + 'rest/cashOrder/' + month + "/" + year, { headers });
@@ -29,7 +38,7 @@ export class CashOrderService {
     
     getCashOrder(cashOrderCode: string): Observable<CashOrder> {
         let headers = new HttpHeaders({
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDU4NDIwMjIsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ2NzA2MDIyfQ.bQYnf82vTANJBgWFsfRnH2yJ2IgrTS6g4Fq3LUhIasgTVcaE5eezy4Fgji0W8BrgEbWflXIMjAyz7WQzBp4Ppw'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDcwMjYyNDEsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ3ODkwMjQxfQ.BXGERbj9YBpg2n7CQBwnZ0tlFamoTuPGCfZxTx4afqFVx2d7_gNmphMYQMdm5CL384CZwpCuoCsp5xpd4BGkog'
         });
         
         return this.http.get<CashOrder>(this.BASE_API_URL + 'rest/cashOrder/' + cashOrderCode, { headers });
@@ -40,7 +49,7 @@ export class CashOrderService {
         let body = JSON.stringify(cashOrder);
         let headers = new HttpHeaders({
             'Content-Type':'application/json',
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDU4NDIwMjIsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ2NzA2MDIyfQ.bQYnf82vTANJBgWFsfRnH2yJ2IgrTS6g4Fq3LUhIasgTVcaE5eezy4Fgji0W8BrgEbWflXIMjAyz7WQzBp4Ppw'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDcwMjYyNDEsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ3ODkwMjQxfQ.BXGERbj9YBpg2n7CQBwnZ0tlFamoTuPGCfZxTx4afqFVx2d7_gNmphMYQMdm5CL384CZwpCuoCsp5xpd4BGkog'
         });
         
         return this.http.post<CashOrder>(this.BASE_API_URL + 'rest/cashOrder/', body, { headers });
@@ -50,39 +59,113 @@ export class CashOrderService {
         let body = JSON.stringify(cashOrder);
         let headers = new HttpHeaders({
             'Content-Type':'application/json',
-            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDU4NDIwMjIsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ2NzA2MDIyfQ.bQYnf82vTANJBgWFsfRnH2yJ2IgrTS6g4Fq3LUhIasgTVcaE5eezy4Fgji0W8BrgEbWflXIMjAyz7WQzBp4Ppw'
+            'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NDcwMjYyNDEsImlzcyI6Imh0dHBzOi8vd3d3LmF1dGVudGlhLmNvbS8iLCJzdWIiOiJiZW5pdG9taWxsYW5AZ21haWwuY29tIiwiZXhwIjoxNTQ3ODkwMjQxfQ.BXGERbj9YBpg2n7CQBwnZ0tlFamoTuPGCfZxTx4afqFVx2d7_gNmphMYQMdm5CL384CZwpCuoCsp5xpd4BGkog'
         });
         
         return this.http.put<CashOrder>(this.BASE_API_URL + 'rest/cashOrder/', body, { headers });
     }
-    
-    uploadImage(imageURI){
-        return new Promise<any>((resolve, reject) => {
-            let storageRef = firebase.storage().ref();
-            let imageRef = storageRef.child('image');
-            this.encodeImageUri(imageURI, function(image64){
-                imageRef.putString(image64, 'data_url')
-                .then(snapshot => {
-                    resolve(snapshot.downloadURL)
-                }, err => {
-                    reject(err);
-                })
-            })
-        })
-    }
-    
-    encodeImageUri(imageUri, callback) {
-        var c = document.createElement('canvas');
-        var ctx = c.getContext("2d");
-        var img = new Image();
-        img.onload = function () {
-            var aux:any = this;
-            c.width = aux.width;
-            c.height = aux.height;
-            ctx.drawImage(img, 0, 0);
-            var dataURL = c.toDataURL("image/jpeg");
-            callback(dataURL);
+1
+    async pickImage() {
+        debugger;
+        const options: CameraOptions = {
+          quality: 80,
+          destinationType: this.camera.DestinationType.FILE_URI,
+          encodingType: this.camera.EncodingType.JPEG,
+          mediaType: this.camera.MediaType.PICTURE
         };
-        img.src = imageUri;
+    
+        try {
+          let cameraInfo = await this.camera.getPicture(options);
+          let blobInfo: any = await this.makeFileIntoBlob(cameraInfo);
+          let downloadURL: any = await this.uploadToFirebase(blobInfo);
+          this.downloadImage(downloadURL, blobInfo.fileName);
+          alert("Imagen subida con éxito: " + blobInfo.fileName);
+
+          return downloadURL;
+        } catch (e) {
+          console.log(e.message);
+          alert("File Upload Error " + e.message);
+        }
+      }
+
+    downloadImage(image, fileName) {
+      //here encoding path as encodeURI() format.  
+      //let url = encodeURI("https://assets.trome.pe/files/ec_article_multimedia_gallery/uploads/2018/04/17/5ad609d27c1a7.jpeg");  
+      //here initializing object.  
+      this.fileTransfer = this.transfer.create();  
+      // here iam mentioned this line this.file.externalRootDirectory is a native pre-defined file path storage. You can change a file path whatever pre-defined method.  
+      this.fileTransfer.download(image, this.file.externalRootDirectory + "Download/" + fileName, true).then((entry) => {  
+          //here logging our success downloaded file path in mobile.  
+          console.log('download completed: ' + entry.toURL());  
+      }, (error) => {  
+          //here logging our error its easier to find out what type of error occured.  
+          console.log('download failed: ' + error);  
+      });  
+    }
+
+    makeFileIntoBlob(_imagePath) {
+        // INSTALL PLUGIN - cordova plugin add cordova-plugin-file
+        return new Promise((resolve, reject) => {
+          let fileName = "";
+          this.file
+            .resolveLocalFilesystemUrl(_imagePath)
+            .then(fileEntry => {
+              let { name, nativeURL } = fileEntry;
+    
+              // get the path..
+              let path = nativeURL.substring(0, nativeURL.lastIndexOf("/"));
+              console.log("path", path);
+              console.log("fileName", name);
+    
+              fileName = name;
+    
+              // we are provided the name, so now read the file into
+              // a buffer
+              return this.file.readAsArrayBuffer(path, name);
+            })
+            .then(buffer => {
+              // get the buffer and make a blob to be saved
+              let imgBlob = new Blob([buffer], {
+                type: "image/jpeg"
+              });
+              console.log(imgBlob.type, imgBlob.size);
+              resolve({
+                fileName,
+                imgBlob
+              });
+            })
+            .catch(e => reject(e));
+        });
+      }
+    
+      /**
+       *
+       * @param _imageBlobInfo
+       */
+      uploadToFirebase(_imageBlobInfo) {
+        return new Promise((resolve, reject) => {
+          let fileRef = firebase.storage().ref("images/" + _imageBlobInfo.fileName);
+    debugger;
+          let uploadTask = fileRef.put(_imageBlobInfo.imgBlob);
+    
+          uploadTask.on(
+            "state_changed",
+            (_snapshot: any) => {
+              console.log(
+                "snapshot progess " +
+                  (_snapshot.bytesTransferred / _snapshot.totalBytes) * 100
+              );
+            },
+            _error => {
+              console.log(_error);
+              reject(_error);
+            },
+            () => {
+              // completion...
+              debugger;
+              resolve(fileRef.getDownloadURL());
+            }
+          );
+        });
     }
 }

@@ -38,9 +38,14 @@ import { AngularFireModule } from 'angularfire2';
 
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
-import { environment } from "../environment/environment";
+  import { environment } from "../environment/environment";
 
 import { ImagePicker } from '@ionic-native/image-picker';
+
+import { File } from '@ionic-native/file';
+
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Transfer, TransferObject} from '@ionic-native/transfer';
 import firebase from 'firebase';
 
 @NgModule({
@@ -96,7 +101,10 @@ import firebase from 'firebase';
     SplashScreen,
     { provide: LOCALE_ID, useValue: 'es-ES' },
     { provide: ErrorHandler, useClass: IonicErrorHandler},
-    ImagePicker
+    ImagePicker,
+    File,
+    Camera,
+    Transfer
   ],
 })
 export class AppModule {}
