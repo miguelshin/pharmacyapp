@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, IonicPageModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
+import { Login } from '../pages/login/login';
+
 import { PharmacyListPage } from '../pages/pharmacy/pharmacy.list.component';
 import { PharmacyEditPage } from '../pages/pharmacy/edit/pharmacy.edit.component';
 import { PharmacySelectPage } from '../pages/pharmacy/select/pharmacy.select.page';
@@ -47,9 +49,12 @@ import { File } from '@ionic-native/file';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Transfer, TransferObject} from '@ionic-native/transfer';
 import firebase from 'firebase';
+import { LoginService } from '../services/login.service';
+
 
 @NgModule({
   declarations: [
+    Login,
     PharmacyListPage,
     PharmacyEditPage,
     PharmacySelectPage,
@@ -76,6 +81,7 @@ import firebase from 'firebase';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
+    Login,
     PharmacyListPage,
     PharmacyEditPage,
     PharmacySelectPage,
@@ -93,6 +99,7 @@ import firebase from 'firebase';
     TabsPage,
   ],
   providers: [
+    LoginService,
     PharmacyService,
     LaboratoryService,
     ProductService,
@@ -108,4 +115,6 @@ import firebase from 'firebase';
   ],
 })
 export class AppModule {}
+
+
 registerLocaleData(localeES);
