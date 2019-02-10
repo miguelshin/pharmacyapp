@@ -16,7 +16,6 @@ import { CashOrderProduct } from '../../models/cashorderproduct.model';
 
   constructor(public cashOrderService: CashOrderService, public navCtrl: NavController, private navParams: NavParams, public viewCtrl: ViewController, private modalCtrl: ModalController, public toastCtrl: ToastController) {
     let preselectedDate = moment(this.navParams.get('selectedDay')).format();
-    debugger;
     this.cashOrderProduct.product = new Product();
   }
   

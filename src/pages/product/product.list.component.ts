@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-    import { ProductService } from '../../services/product.service';
+import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.model';
 import { NavController } from 'ionic-angular';
 import { ProductEditPage } from './edit/product.edit.component';
@@ -17,9 +17,7 @@ export class ProductListPage implements OnInit {
     
     ionViewWillEnter() {
         this.productService.getProducts().subscribe(data => {
-            debugger;
             this.productList = data;
-            //this.ProductList = 
         });
     }
     
@@ -27,7 +25,6 @@ export class ProductListPage implements OnInit {
         this.productService
         .getProduct(product.code)
         .subscribe(selectedProduct => {
-            debugger;
             this.navCtrl.push(ProductEditPage, { selectedProduct: selectedProduct });
         });
     }

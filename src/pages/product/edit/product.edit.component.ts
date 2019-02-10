@@ -11,11 +11,9 @@ import { LaboratorySelectPage } from '../../laboratory/select/laboratory.select.
     templateUrl: './product.edit.component.html'
 })
 export class ProductEditPage implements OnInit {
-    debugger;
     product: Product;
     productForm: FormGroup;
     constructor(public productService: ProductService, private navCtrl: NavController, private navParams: NavParams, public toastCtrl: ToastController, public formBuilder: FormBuilder ) { 
-        debugger;
         this.productForm = formBuilder.group({
             name: ['',  Validators.compose([Validators.maxLength(150)])],
             product: ['',  Validators.compose([Validators.maxLength(36)])]
@@ -34,14 +32,14 @@ export class ProductEditPage implements OnInit {
             this.presentSavedProductToast('No se puede guardar. Revise los campos');
         } else {
             if (productToSave.code) {
-                var selectedProduct = this.productService
+                this.productService
                 .updateProduct(productToSave)
                 .subscribe(savedProduct => {
                     this.product = savedProduct;
                     this.presentSavedProductToast('El producto fue guardado con éxito');
                 });
             } else {
-                var selectedProduct = this.productService
+                this.productService
                 .saveProduct(productToSave)
                 .subscribe(savedProduct => {
                     this.product = savedProduct;

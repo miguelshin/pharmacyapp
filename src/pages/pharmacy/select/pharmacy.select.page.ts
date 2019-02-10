@@ -19,24 +19,20 @@ export class PharmacySelectPage implements OnInit {
     
     ionViewWillEnter() {
         this.pharmacyService.getPharmacies().subscribe(data => {
-            debugger;
             this.pharmacyList = data;
         });
     }
     
     searchPharmacy() {
-        debugger;
         this.pharmacyService
         .searchPharmacies(this.searchText)
         .subscribe(pharmacies => {
             console.log(pharmacies);
-            debugger;
             this.pharmacyList = pharmacies;
         });
     }
     
     selectPharmacy(pharmacy: Pharmacy) {
-        debugger;
         this.selectedPharmacy = pharmacy;
         this.viewCtrl.dismiss(this.selectedPharmacy);
     }

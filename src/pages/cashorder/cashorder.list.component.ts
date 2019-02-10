@@ -26,7 +26,6 @@ export class CashOrderListPage {
     let month = today.getMonth();
     let year = today.getFullYear();
     this.cashOrderService.getCashOrders(month, year).subscribe(cashOrders => {
-      debugger;
       let events = this.eventSource;
       cashOrders.forEach(cashOrder => {
         let date = new Date(cashOrder.date);
@@ -67,29 +66,17 @@ export class CashOrderListPage {
     let hoursOffset = (new Date(event.startTime)).getTimezoneOffset() / 60;
     date.setHours(event.startTime.getHours() + hoursOffset);
 
-    let start = moment(date).format('LLLL');
-    let end = moment(date).format('LLLL');
-    
-    /*let alert = this.alertCtrl.create({
-      title: '' + event.title,
-      subTitle: 'From: ' + start + '<br>To: ' + end,
-      buttons: ['OK']
-    })
-    alert.present();*/
     this.goToEditCashOrder(event.code);
   }
 
   goToEditCashOrder(cashOrderCode: string) {
     let modal = this.modalCtrl.create(CashOrderEditModalPage, {code: cashOrderCode});
-    // 
-    //this.cashOrderService.getCashOrders // TODO: par cada fecha, poner un event en eventsource con el formato:
-    //  event = { startTime: new Date().toISOString(), endTime: new Date().toISOString(), allDay: false };
+
     modal.present();
     modal.onDidDismiss(cashOrder => {
       this.ionViewWillEnter();
     });
   }
-
 
   onTimeSelected(ev) {
     this.selectedDay = ev.selectedTime;

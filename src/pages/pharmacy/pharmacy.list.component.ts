@@ -17,9 +17,7 @@ export class PharmacyListPage implements OnInit {
     
     ionViewWillEnter() {
         this.pharmacyService.getPharmacies().subscribe(data => {
-            debugger;
             this.pharmacyList = data;
-            //this.pharmacyList = 
         });
     }
     
@@ -27,7 +25,6 @@ export class PharmacyListPage implements OnInit {
         this.pharmacyService
         .getPharmacy(pharmacy.code)
         .subscribe(selectedPharmacy => {
-            debugger;
             this.navCtrl.push(PharmacyEditPage, { selectedPharmacy: selectedPharmacy });
         });
     }

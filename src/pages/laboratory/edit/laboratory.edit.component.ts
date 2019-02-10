@@ -10,11 +10,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
         templateUrl: './laboratory.edit.component.html'
 })
 export class LaboratoryEditPage implements OnInit {
-    debugger;
     laboratory: Laboratory;
     laboratoryForm: FormGroup;
     constructor(public laboratoryService: LaboratoryService, private navCtrl: NavController, private navParams: NavParams, public toastCtrl: ToastController, public formBuilder: FormBuilder ) { 
-        debugger;
         this.laboratoryForm = formBuilder.group({
             name: ['',  Validators.compose([Validators.maxLength(75), Validators.required])],
             address: ['',  Validators.compose([Validators.maxLength(150)])],

@@ -17,7 +17,6 @@ export class LaboratoryListPage implements OnInit {
     
     ionViewWillEnter() {
         this.laboratoryService.getLaboratories().subscribe(data => {
-            debugger;
             this.laboratoryList = data;
             //this.LaboratoryList = 
         });
@@ -27,7 +26,6 @@ export class LaboratoryListPage implements OnInit {
         this.laboratoryService
         .getLaboratory(laboratory.code)
         .subscribe(selectedLaboratory => {
-            debugger;
             this.navCtrl.push(LaboratoryEditPage, { selectedLaboratory: selectedLaboratory });
         });
     }

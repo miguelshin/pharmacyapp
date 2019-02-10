@@ -19,7 +19,6 @@ export class LaboratorySelectPage implements OnInit {
     
     ionViewWillEnter() {
         this.laboratoryService.getLaboratories().subscribe(data => {
-            debugger;
             this.laboratoryList = data;
             this.goToEditProductOnSelectLaboratory = this.navParams.get("goToEditProductOnSelectLaboratory")
             //this.LaboratoryList = 
@@ -27,18 +26,15 @@ export class LaboratorySelectPage implements OnInit {
     }
     
     searchLaboratory() {
-        debugger;
         this.laboratoryService
         .searchLaboratories(this.searchText)
         .subscribe(laboratories => {
             console.log(laboratories);
-            debugger;
             this.laboratoryList = laboratories;
         });
     }
 
     selectLaboratory(laboratory: Laboratory) {
-        debugger;
         this.goToEditLaboratory(laboratory);
     }
     

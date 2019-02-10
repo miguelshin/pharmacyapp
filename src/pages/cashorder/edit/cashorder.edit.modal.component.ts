@@ -29,7 +29,7 @@ export class CashOrderEditModalPage {
     public imagePicker: ImagePicker) {
       let preselectedDate = moment(this.navParams.get('selectedDay')).format();
       let code = this.navParams.get('code');
-      debugger;
+
       if (code) {
         this.getCashOrder(code);
       }
@@ -51,7 +51,6 @@ export class CashOrderEditModalPage {
     getCashOrder(code: string) {
       this.cashOrderService.getCashOrder(code)
       .subscribe(cashOrder => {
-        debugger;
         this.cashOrder = cashOrder;
         this.cashOrder.date = new Date((new Date(this.cashOrder.date)).getTime() - this.userTimezoneOffset).toISOString();
       });
@@ -86,11 +85,9 @@ export class CashOrderEditModalPage {
     }
     
     openCashOrderProductModal(cashOrderProduct) {
-      debugger;
       let modal = this.modalCtrl.create(CashOrderProductEditModalPage);
       modal.present();
       modal.onDidDismiss(cashOrderProduct => {
-        debugger;
         if (cashOrderProduct) {
           this.cashOrder.cashOrderProducts.push(cashOrderProduct);
         }
@@ -99,17 +96,14 @@ export class CashOrderEditModalPage {
     
     openImagePicker(){
       this.cashOrderService.pickImage().then((uploadedImage) => {
-        debugger;
         if (uploadedImage) {
           alert(uploadedImage + "XDD");
           this.cashOrder.cashOrderImages.push(uploadedImage);
         }
       });
-    debugger;
   }
 
   openImage(url) {
-    debugger;
     this.selectedImg = url;
   }
 

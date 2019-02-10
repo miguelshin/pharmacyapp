@@ -18,24 +18,20 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
     
     ionViewWillEnter() {
             this.productService.getProducts().subscribe(data => {
-            debugger;
             this.productList = data;
         });
     }
     
     searchProducts() {
-        debugger;
         this.productService
         .searchProducts(this.searchText)
         .subscribe(pharmacies => {
             console.log(pharmacies);
-            debugger;
             this.productList = pharmacies;
         });
     }
     
     selectProduct(product: Product) {
-        debugger;
         this.selectedProduct = product;
         this.viewCtrl.dismiss(this.selectedProduct);
     }

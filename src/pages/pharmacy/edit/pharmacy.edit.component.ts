@@ -13,7 +13,6 @@ export class PharmacyEditPage implements OnInit {
     pharmacy: Pharmacy;
     pharmacyForm: FormGroup;
     constructor(public pharmacyService: PharmacyService, private navCtrl: NavController, private navParams: NavParams, public toastCtrl: ToastController, public formBuilder: FormBuilder ) { 
-        debugger;
         this.pharmacyForm = formBuilder.group({
             name: ['',  Validators.compose([Validators.maxLength(75), Validators.required])],
             address: ['',  Validators.compose([Validators.maxLength(150)])],
